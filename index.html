@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FORME STUDIO | Wear Your Form</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;1,500&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --cream:#f5f0e8;
+  --paper:#fffdf8;
+  --burgundy:#702b3a;
+  --ink:#252321;
+  --muted:#827c75;
+  --line:#e6ded3;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--cream);color:var(--ink);font-family:'DM Sans',sans-serif;overflow-x:hidden}
+button,a{font:inherit}
+a{text-decoration:none;color:inherit}
+button{cursor:pointer}
+
+.announcement{background:var(--burgundy);color:white;text-align:center;padding:10px;font-size:10px;letter-spacing:2px}
+
+header{
+  height:78px;padding:0 7%;display:flex;align-items:center;
+  justify-content:space-between;background:var(--cream);
+  border-bottom:1px solid var(--line);position:sticky;top:0;z-index:20
+}
+.logo{font-size:25px;font-weight:700;letter-spacing:5px}
+.logo span{color:var(--burgundy)}
+nav{display:flex;gap:32px;font-size:11px;letter-spacing:1.5px;text-transform:uppercase}
+nav a:hover{color:var(--burgundy)}
+.header-actions{display:flex;align-items:center;gap:20px}
+.cart-button,.menu-button{background:none;border:0;font-size:12px;letter-spacing:1px}
+.menu-button{display:none;font-size:24px}
+
+.hero{
+  min-height:650px;display:grid;grid-template-columns:1fr 1fr;
+  padding:45px 7% 65px;gap:35px;align-items:center
+}
+.hero-copy{padding:35px 0;animation:slideUp 1s both}
+.eyebrow{font-size:10px;letter-spacing:4px;color:var(--burgundy);font-weight:700}
+.hero h1{
+  font-family:'Playfair Display',serif;font-size:clamp(58px,7vw,100px);
+  line-height:.98;font-weight:500;margin:24px 0
+}
+.hero h1 em{color:var(--burgundy);font-weight:500}
+.hero-copy p{max-width:390px;color:var(--muted);font-size:14px;line-height:1.9}
+.primary-btn{
+  display:inline-block;background:var(--burgundy);color:white;
+  padding:17px 27px;margin-top:30px;font-size:10px;
+  letter-spacing:2px;text-transform:uppercase;border:1px solid var(--burgundy);
+  transition:.3s
+}
+.primary-btn:hover{background:transparent;color:var(--burgundy);transform:translateY(-3px)}
+.hero-image{height:555px;position:relative;overflow:hidden;animation:fadeIn 1.2s both}
+.hero-image img{width:100%;height:100%;object-fit:cover;transition:transform 1s}
+.hero-image:hover img{transform:scale(1.04)}
+.hero-tag{position:absolute;bottom:22px;left:22px;background:var(--paper);padding:14px 18px;font-size:10px;letter-spacing:2px}
+
+.marquee{overflow:hidden;background:var(--burgundy);color:white;padding:17px 0;white-space:nowrap;font-family:'Playfair Display',serif;font-size:22px}
+.marquee div{display:inline-block;animation:marquee 25s linear infinite}
+.marquee span{padding:0 35px}
+
+.section{padding:100px 7%}
+.section-heading{display:flex;justify-content:space-between;align-items:end;margin-bottom:38px;gap:20px}
+.section-heading h2{font-family:'Playfair Display',serif;font-size:clamp(38px,5vw,60px);font-weight:500}
+.section-heading p{font-size:12px;color:var(--muted);line-height:1.7}
+
+.filters{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:30px}
+.filter{padding:11px 19px;border:1px solid var(--line);background:transparent;font-size:10px;letter-spacing:1px;text-transform:uppercase;transition:.3s}
+.filter.active,.filter:hover{background:var(--burgundy);color:white;border-color:var(--burgundy)}
+
+.products{display:grid;grid-template-columns:repeat(4,1fr);gap:22px}
+.product{animation:fadeIn .6s both}
+.product-image{height:340px;background:#e8dfd4;position:relative;overflow:hidden}
+.product-image img{width:100%;height:100%;object-fit:cover;transition:transform .7s}
+.product:hover img{transform:scale(1.06)}
+.product-tag{position:absolute;top:13px;left:13px;background:var(--paper);padding:7px 10px;font-size:9px;letter-spacing:1px}
+.add-btn{position:absolute;bottom:12px;left:12px;right:12px;background:var(--paper);border:0;padding:13px;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;transition:.3s}
+.add-btn:hover{background:var(--burgundy);color:white}
+.product-info{padding:15px 2px}
+.product-info h3{font-size:13px;font-weight:500}
+.product-info p{font-size:11px;color:var(--muted);margin-top:7px}
+.product-info strong{display:block;margin-top:9px;font-size:13px}
+
+.story{background:#ded0c5;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;padding:90px 10%}
+.story-image{height:480px;overflow:hidden}
+.story-image img{width:100%;height:100%;object-fit:cover}
+.story-copy h2{font-family:'Playfair Display',serif;font-size:clamp(40px,5vw,65px);font-weight:500;line-height:1.1;margin:20px 0}
+.story-copy p{color:#665e58;font-size:13px;line-height:2;max-width:430px}
+
+.categories{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.category{height:390px;position:relative;overflow:hidden;color:white}
+.category img{width:100%;height:100%;object-fit:cover;transition:.8s}
+.category:hover img{transform:scale(1.08)}
+.category:after{content:"";position:absolute;inset:0;background:linear-gradient(transparent,rgba(0,0,0,.55))}
+.category h3{position:absolute;bottom:25px;left:25px;z-index:1;font-family:'Playfair Display',serif;font-size:31px;font-weight:500}
+
+.newsletter{background:var(--burgundy);color:white;text-align:center;padding:85px 20px}
+.newsletter h2{font-family:'Playfair Display',serif;font-size:48px;font-weight:500}
+.newsletter p{font-size:12px;color:#e5cdd1;margin:14px 0 25px}
+.newsletter form{display:flex;max-width:430px;margin:auto}
+.newsletter input{flex:1;min-width:0;padding:15px;background:transparent;border:1px solid #b58a94;color:white;outline:none}
+.newsletter input::placeholder{color:#e5cdd1}
+.newsletter button{padding:0 22px;border:0;background:var(--cream);color:var(--burgundy);font-size:10px;letter-spacing:1px}
+
+footer{padding:45px 7%;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+footer p{font-size:10px;color:var(--muted);letter-spacing:1px}
+
+.cart-panel{
+  position:fixed;right:-420px;top:0;width:min(400px,100%);
+  height:100%;background:var(--paper);z-index:50;padding:28px;
+  box-shadow:-10px 0 40px #0001;transition:.4s;overflow:auto
+}
+.cart-panel.open{right:0}
+.cart-top{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--line);padding-bottom:20px}
+.cart-top h2{font-family:'Playfair Display',serif;font-size:28px}
+.close-cart{border:0;background:none;font-size:25px}
+.cart-items{padding:20px 0}
+.cart-item{display:flex;justify-content:space-between;gap:15px;padding:13px 0;border-bottom:1px solid var(--line);font-size:12px}
+.cart-item button{border:0;background:none;color:var(--burgundy)}
+.cart-total{display:flex;justify-content:space-between;margin-top:25px;font-weight:700}
+.cart-note{font-size:11px;color:var(--muted);line-height:1.7;margin-top:15px}
+
+.toast{position:fixed;bottom:25px;left:50%;transform:translate(-50%,100px);background:var(--ink);color:white;padding:14px 22px;font-size:12px;z-index:80;transition:.4s}
+.toast.show{transform:translate(-50%,0)}
+.reveal{opacity:0;transform:translateY(30px);transition:all .8s}
+.reveal.visible{opacity:1;transform:translateY(0)}
+
+@keyframes slideUp{from{opacity:0;transform:translateY(35px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes marquee{to{transform:translateX(-50%)}}
+
+@media(max-width:900px){
+  .products{grid-template-columns:repeat(2,1fr)}
+  .hero{min-height:auto}
+  .hero-image{height:460px}
+  .story{padding:70px 7%;gap:30px}
+}
+@media(max-width:650px){
+  header{height:68px;padding:0 5%}
+  .logo{font-size:21px}
+  nav{display:none;position:absolute;top:68px;left:0;width:100%;background:var(--paper);padding:25px;flex-direction:column;gap:22px;border-bottom:1px solid var(--line)}
+  nav.show{display:flex}
+  .menu-button{display:block}
+  .hero{grid-template-columns:1fr;padding:40px 6%;gap:25px}
+  .hero h1{font-size:65px}
+  .hero-image{height:430px}
+  .section{padding:70px 6%}
+  .section-heading{align-items:start;flex-direction:column}
+  .products{gap:13px}
+  .product-image{height:260px}
+  .story{grid-template-columns:1fr;padding:65px 6%}
+  .story-image{height:380px}
+  .categories{grid-template-columns:1fr}
+  .category{height:380px}
+  .newsletter h2{font-size:38px}
+}
+</style>
+</head>
+
+<body>
+
+<div class="announcement">COMPLIMENTARY SHIPPING ON ORDERS OVER $150</div>
+
+<header>
+  <a class="logo" href="#">FORME<span>.</span></a>
+  <nav id="nav">
+    <a href="#shop">Shop</a>
+    <a href="#collections">Collections</a>
+    <a href="#story">Our philosophy</a>
+    <a href="#newsletter">Contact</a>
+  </nav>
+  <div class="header-actions">
+    <button class="cart-button" onclick="toggleCart()">BAG (<span id="cartCount">0</span>)</button>
+    <button class="menu-button" onclick="toggleMenu()">☰</button>
+  </div>
+</header>
+
+<main>
+<section class="hero">
+  <div class="hero-copy">
+    <span class="eyebrow">THE NEW EXPRESSION OF EVERYDAY</span>
+    <h1>Style has<br>no <em>limits.</em></h1>
+    <p>Thoughtfully designed essentials. Effortless silhouettes. Fashion without boundaries. Discover a new way to express yourself.</p>
+    <a href="#shop" class="primary-btn">Explore collection ↗</a>
+  </div>
+  <div class="hero-image">
+    <img src="https://images.unsplash.com/photo-1539109136881-3be0616acf4b?auto=format&fit=crop&w=1100&q=85" alt="Fashion editorial">
+    <div class="hero-tag">FORME STUDIO — COLLECTION 01</div>
+  </div>
+</section>
+
+<div class="marquee"><div>
+  <span>WEAR YOUR FORM</span> ✳ <span>BEYOND THE ORDINARY</span> ✳
+  <span>WEAR YOUR FORM</span> ✳ <span>BEYOND THE ORDINARY</span> ✳
+</div></div>
+
+<section class="section" id="shop">
+  <div class="section-heading reveal">
+    <div><span class="eyebrow">CURATED FOR YOU</span><h2>Latest arrivals.</h2></div>
+    <p>Pieces that speak without saying too much.<br>Designed for every form of expression.</p>
+  </div>
+
+  <div class="filters reveal">
+    <button class="filter active" onclick="filterProducts('all',this)">All</button>
+    <button class="filter" onclick="filterProducts('tops',this)">Tops</button>
+    <button class="filter" onclick="filterProducts('bottoms',this)">Bottoms</button>
+    <button class="filter" onclick="filterProducts('outerwear',this)">Outerwear</button>
+    <button class="filter" onclick="filterProducts('accessories',this)">Accessories</button>
+  </div>
+
+  <div class="products" id="products">
+
+    <article class="product" data-category="tops">
+      <div class="product-image">
+        <img src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=700&q=85" alt="Essential oversized tee">
+        <span class="product-tag">BESTSELLER</span>
+        <button class="add-btn" onclick="addToCart('Essential Oversized Tee',45)">Add to bag — $45</button>
+      </div>
+      <div class="product-info"><h3>Essential Oversized Tee</h3><p>Relaxed fit / Cream</p><strong>$45.00</strong></div>
+    </article>
+
+    <article class="product" data-category="bottoms">
+      <div class="product-image">
+        <img src="https://images.unsplash.com/photo-1542272604-787c3835535d?auto=format&fit=crop&w=700&q=85" alt="Tailored trousers">
+        <span class="product-tag">NEW</span>
+        <button class="add-btn" onclick="addToCart('Everyday Tailored Trousers',89)">Add to bag — $89</button>
+      </div>
+      <div class="product-info"><h3>Everyday Tailored Trousers</h3><p>Wide leg / Charcoal</p><strong>$89.00</strong></div>
+    </article>
+
+    <article class="product" data-category="outerwear">
+      <div class="product-image">
+        <img src="https://images.unsplash.com/photo-1591047139829-d91aecb6caea?auto=format&fit=crop&w=700&q=85" alt="Structured jacket">
+        <span class="product-tag">LIMITED</span>
+        <button class="add-btn" onclick="addToCart('The Structure Jacket',145)">Add to bag — $145</button>
+      </div>
+      <div class="product-info"><h3>The Structure Jacket</h3><p>Oversized / Sand</p><strong>$145.00</strong></div>
+    </article>
+
+    <article class="product" data-category="accessories">
+      <div class="product-image">
+        <img src="https://images.unsplash.com/photo-1548036328-c9fa89d128fa?auto=format&fit=crop&w=700&q=85" alt="Minimal everyday bag">
+        <span class="product-tag">POPULAR</span>
+        <button class="add-btn" onclick="addToCart('Everyday Form Bag',75)">Add to bag — $75</button>
+      </div>
+      <div class="product-info"><h3>Everyday Form Bag</h3><p>Minimal / Burgundy</p><strong>$75.00</strong></div>
+    </article>
+
+    <article class="product" data-category="tops">
+      <div class="product-image">
+        <img src="https://images.unsplash.com/photo-1576566588028-4147f3842f27?auto=format&fit=crop&w=700&q=85" alt="Classic knit">
+        <button class="add-btn" onclick="addToCart('Classic Knit Essential',68)">Add to bag — $68</button>
+      </div>
+      <div class="product-info"><h3>Classic Knit Essential</h3><p>Relaxed fit / Neutral</p><strong>$68.00</strong></div>
+    </article>
+
+    <article class="product" data-category="bottoms">
+      <div class="product-image">
+        <img src="https://images.unsplash.com/photo-1473966968600-fa801b869a1a?auto=format&fit=crop&w=700&q=85" alt="Everyday denim">
+        <button class="add-btn" onclick="addToCart('Form Denim',95)">Add to bag — $95</button>
+      </div>
+      <div class="product-info"><h3>Form Denim</h3><p>Relaxed / Vintage blue</p><strong>$95.00</strong></div>
+    </article>
+
+    <article class="product" data-category="outerwear">
+      <div class="product-image">
+        <img src="https://images.unsplash.com/photo-1551028719-00167b16eac5?auto=format&fit=crop&w=700&q=85" alt="Leather jacket">
+        <button class="add-btn" onclick="addToCart('The Statement Jacket',165)">Add to bag — $165</button>
+      </div>
+      <div class="product-info"><h3>The Statement Jacket</h3><p>Classic / Dark brown</p><strong>$165.00</strong></div>
+    </article>
+
+    <article class="product" data-category="accessories">
+      <div class="product-image">
+        <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=700&q=85" alt="Minimal watch">
+        <button class="add-btn" onclick="addToCart('Studio Timepiece',110)">Add to bag — $110</button>
+      </div>
+      <div class="product-info"><h3>Studio Timepiece</h3><p>Minimal / Silver</p><strong>$110.00</strong></div>
+    </article>
+
+  </div>
+</section>
+
+<section class="story" id="story">
+  <div class="story-image reveal">
+    <img src="https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=1000&q=85" alt="FORME editorial fashion">
+  </div>
+  <div class="story-copy reveal">
+    <span class="eyebrow">OUR PHILOSOPHY</span>
+    <h2>Fashion is a form of expression.</h2>
+    <p>FORME STUDIO exists beyond labels and expectations. We believe style should be personal, effortless and unrestricted. Every piece is selected with intention, designed to become part of your everyday story.</p>
+    <a href="#shop" class="primary-btn">Discover the collection ↗</a>
+  </div>
+</section>
+
+<section class="section" id="collections">
+  <div class="section-heading reveal">
+    <div><span class="eyebrow">FIND YOUR FORM</span><h2>Explore collections.</h2></div>
+  </div>
+  <div class="categories">
+    <a href="#shop" class="category reveal">
+      <img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=900&q=85" alt="Everyday collection">
+      <h3>Everyday wear ↗</h3>
+    </a>
+    <a href="#shop" class="category reveal">
+      <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=900&q=85" alt="Statement collection">
+      <h3>Statement pieces ↗</h3>
+    </a>
+    <a href="#shop" class="category reveal">
+      <img src="https://images.unsplash.com/photo-1523398002811-999ca8dec234?auto=format&fit=crop&w=900&q=85" alt="Essentials collection">
+      <h3>Modern essentials ↗</h3>
+    </a>
+  </div>
+</section>
+
+<section class="newsletter" id="newsletter">
+  <span class="eyebrow" style="color:#e9bdc6">THE FORME EDIT</span>
+  <h2>Stay in the know.</h2>
+  <p>New collections, fresh inspiration and a little something for your inbox.</p>
+  <form onsubmit="subscribe(event)">
+    <input type="email" placeholder="Your email address" required>
+    <button type="submit">SUBSCRIBE ↗</button>
+  </form>
+</section>
+</main>
+
+<footer>
+  <a class="logo" href="#">FORME<span>.</span></a>
+  <p>WEAR YOUR FORM. © 2026 FORME STUDIO.</p>
+  <p>INSTAGRAM &nbsp; / &nbsp; PINTEREST</p>
+</footer>
+
+<aside class="cart-panel" id="cartPanel">
+  <div class="cart-top">
+    <h2>Your bag</h2>
+    <button class="close-cart" onclick="toggleCart()">×</button>
+  </div>
+  <div class="cart-items" id="cartItems">
+    <p class="cart-note">Your bag is currently empty.</p>
+  </div>
+  <div class="cart-total"><span>Total</span><span id="cartTotal">$0.00</span></div>
+  <p class="cart-note">This is a portfolio demonstration store. Checkout and payment processing are not connected.</p>
+</aside>
+
+<div class="toast" id="toast">Added to your bag.</div>
+
+<script>
+let cart=[];
+
+function toggleCart(){
+  document.getElementById('cartPanel').classList.toggle('open');
+}
+
+function toggleMenu(){
+  document.getElementById('nav').classList.toggle('show');
+}
+
+function addToCart(name,price){
+  cart.push({name,price});
+  updateCart();
+  showToast(name+' added to your bag.');
+}
+
+function removeFromCart(index){
+  cart.splice(index,1);
+  updateCart();
+}
+
+function updateCart(){
+  document.getElementById('cartCount').textContent=cart.length;
+
+  const items=document.getElementById('cartItems');
+  const total=cart.reduce((sum,item)=>sum+item.price,0);
+
+  if(cart.length===0){
+    items.innerHTML='<p class="cart-note">Your bag is currently empty.</p>';
+  }else{
+    items.innerHTML=cart.map((item,index)=>`
+      <div class="cart-item">
+        <div><strong>${item.name}</strong><br><br>$${item.price.toFixed(2)}</div>
+        <button onclick="removeFromCart(${index})">Remove ×</button>
+      </div>
+    `).join('');
+  }
+
+  document.getElementById('cartTotal').textContent='$'+total.toFixed(2);
+}
+
+function filterProducts(category,button){
+  document.querySelectorAll('.filter').forEach(btn=>btn.classList.remove('active'));
+  button.classList.add('active');
+
+  document.querySelectorAll('.product').forEach(product=>{
+    product.style.display=(category==='all'||product.dataset.category===category)?'block':'none';
+  });
+}
+
+function showToast(message){
+  const toast=document.getElementById('toast');
+  toast.textContent=message;
+  toast.classList.add('show');
+  setTimeout(()=>toast.classList.remove('show'),2200);
+}
+
+function subscribe(event){
+  event.preventDefault();
+  showToast('Thank you for joining the FORME edit!');
+  event.target.reset();
+}
+
+const observer=new IntersectionObserver(entries=>{
+  entries.forEach(entry=>{
+    if(entry.isIntersecting){
+      entry.target.classList.add('visible');
+      observer.unobserve(entry.target);
+    }
+  });
+},{threshold:0.12});
+
+document.querySelectorAll('.reveal').forEach(element=>observer.observe(element));
+
+document.querySelectorAll('#nav a').forEach(link=>{
+  link.addEventListener('click',()=>{
+    document.getElementById('nav').classList.remove('show');
+  });
+});
+</script>
+
+</body>
+</html>
